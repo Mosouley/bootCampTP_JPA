@@ -95,6 +95,13 @@ public abstract class BaseRepository<T> {
         return qry.getResultList();
 
     }
+    /**
+     * 
+     * @param propertyName
+     * @param value
+     * @return
+     * @throws SQLException 
+     */
       public T findByPropertyUnique(String propertyName, Object value) throws SQLException {
         
           String className = entityClass.getSimpleName();

@@ -7,7 +7,6 @@ import com.bootcamp.maventpjpa.dao.Beneficiaire_ProgrammeRepository;
 import com.bootcamp.maventpjpa.dao.FournisseurRepository;
 import com.bootcamp.maventpjpa.dao.Fournisseur_ProgrammeRepository;
 import com.bootcamp.maventpjpa.dao.IndicateurPerformanceRepository;
-import com.bootcamp.maventpjpa.dao.ProgrammeRepository;
 import com.bootcamp.maventpjpa.dao.ProjetRepository;
 import com.bootcamp.maventpjpa.entities.Bailleur;
 import com.bootcamp.maventpjpa.entities.Bailleur_Programme;
@@ -123,7 +122,7 @@ public class GenerateTableTest {
         onasa.setNom("ONASA");
 
         frs1.setNom("FOURNISSEUR 1");
-        Fournisseur frs2 = new Fournisseur();
+        
         frs2.setNom("FOURNISSEUR 2");
 
         frs3.setNom("FOURNISSEUR 3");

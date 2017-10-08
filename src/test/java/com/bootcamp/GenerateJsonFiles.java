@@ -86,11 +86,6 @@ public class GenerateJsonFiles {
 
         fondZ.setNom("Fondation ZZZ");
         fondZ.setTypeDeBailleur(TypeDeBailleur.PRIVE);
-        
-        // Create the outer container
-JSONArray dataBailleurs = new JSONArray();
-
-
 
         List<Bailleur> instances=new ArrayList<>();
         instances.add(fmd);
@@ -99,12 +94,14 @@ JSONArray dataBailleurs = new JSONArray();
         instances.add(mef);
         instances.add(pnls);
         instances.add(fondZ);
-        dataBailleurs.put(instances);
+    
        //Créer un nouveau fichier .json pour serialiser les bailleurs
        File fileBailleur=new File("Bailleur.json");
-       //Methode statique d'écriture dans un fichier Json
-       JsonUtils.convertJavaToJson(fileBailleur, fmd);
-
+        //Methode statique d'écriture dans un fichier Json
+        //on serialise la liste de bailleur représentant plusieurs instances 
+        //de bailleurs
+        JsonUtils.convertJavaToJson(fileBailleur, instances);
+   
 
         //        //
         //            //définir les indicateurs de performance
@@ -123,7 +120,7 @@ JSONArray dataBailleurs = new JSONArray();
        //Créer un nouveau fichier .json pour serialiser les indicateurs
        File indicateurFile=new File("IndicateurPerformance.json");
         //Methode statique d'écriture dans un fichier Json
-        JsonUtils.convertJavaToJson(indicateurFile, indicateur1);
+        JsonUtils.convertJavaToJson(indicateurFile, instancesIndic);
     }
     
     @Test
@@ -132,15 +129,22 @@ JSONArray dataBailleurs = new JSONArray();
         File fileBailleur=new File("Bailleur.json");
 //        JSONArray listBailleurs=new JSONArray();
 //        listBailleurs.
-        Bailleur b=JsonUtils.convertJsonToJava(fileBailleur, Bailleur.class);
-        System.out.println(b.getNom());
+       List< Bailleur> listBail=JsonUtils.convertArrayJsonToJava(fileBailleur, Bailleur.class);
+        //afficher l'objet java
+      listBail.stream().forEach((bail) -> {
+            System.out.println(bail.toString());
+        });
         
+        System.out.println("==================================");
           //retourner le string json depuis le fichier indiqué
         File fileIndicateur=new File("IndicateurPerformance.json");
-//        JSONArray listBailleurs=new JSONArray();
-//        listBailleurs.
-        IndicateurPerformance ind=JsonUtils.convertJsonToJava(fileIndicateur, IndicateurPerformance.class);
-        System.out.println(ind.getLibelle());
+//        
+//      Obtenir la liste des instances dans le fichier json
+        List<IndicateurPerformance> ind=JsonUtils.convertArrayJsonToJava(fileIndicateur, IndicateurPerformance.class);
+        ind.stream().forEach((indix) -> {
+            System.out.println(indix.toString());
+        });
+       
     }
     
 }
